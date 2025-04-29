@@ -13,11 +13,9 @@ df = pd.read_csv('Uni_rankings_all.csv')  # Or df = your_dataframe
 
 # Streamlit app
 st.title("University Rankings Dashboard")
-
-# Add subtitle
 st.subheader("USA, UK, Aus, NZ, Canada and Ireland")
 
-# Move the "Select Ranking View" dropdown below the subtitle in the main area
+# Dropdown for view option
 view_option = st.selectbox(
     "Select Russell/Ivy League or All",
     ["All", "Russell Group & Ivy League"],
@@ -32,7 +30,7 @@ rank_mapping = {
     "Overall Rank": ("Overall_Rank", "Russell_Ivy_Overall_Rank")
 }
 
-# Sorting option
+# Dropdown for sorting option
 st.write("Sort ranking by Climate, Social Justice, Gender or OVERALL")
 sort_by = st.selectbox(
     "",
@@ -40,7 +38,7 @@ sort_by = st.selectbox(
     key="sort_by"
 )
 
-# Remove "Rank" from the display name for the selected sort option
+# Display name for the selected sort option
 sort_by_display = sort_by.replace(" Rank", "")
 
 # Filter for Russell Ivy group if selected
@@ -51,163 +49,59 @@ else:
 
 # Prepare the display DataFrame based on the sort option
 if sort_by == "Overall Rank":
-    if view_option == "Russell Group & Ivy League":
-        rank_columns = [
-            "university",  # Exclude "Group" and other rank columns
-            "Russell_Ivy_Overall_Rank"
-        ]
-        df_display = df_filtered[rank_columns]
-        df_display.columns = ["University", "Overall"]
-    else:
-        rank_columns = [
-            "university",  # Exclude "Group" and other rank columns
-            "Overall_Rank"
-        ]
-        df_display = df_filtered[rank_columns]
-        df_display.columns = ["University", "Overall"]
+    rank_columns = ["university", rank_mapping[sort_by][1] if view_option == "Russell Group & Ivy League" else rank_mapping[sort_by][0]]
+    df_display = df_filtered[rank_columns]
+    df_display.columns = ["University", "Overall"]
 else:
-    if view_option == "Russell Group & Ivy League":
-        rank_column = rank_mapping[sort_by][1]  # Use Russell Ivy rank column
-    else:
-        rank_column = rank_mapping[sort_by][0]  # Use overall rank column
-    df_display = df_filtered[["university", rank_column]]  # Exclude "Group" column
+    rank_column = rank_mapping[sort_by][1] if view_option == "Russell Group & Ivy League" else rank_mapping[sort_by][0]
+    df_display = df_filtered[["university", rank_column]]
     df_display.columns = ["University", sort_by_display]
 
 # Sort by the selected rank
 df_display = df_display.sort_values(by=sort_by_display)
 
-# Inject custom CSS to style the University column, reduce gap, make subtitle colorful, set background gradient, and add mobile responsiveness
+# Truncate long University names to reduce column width
+df_display['University'] = df_display['University'].apply(lambda x: x[:50] + '...' if len(x) > 50 else x)
+
+# Apply Styler to format the table
+styled_df = df_display.style.set_properties(**{
+    'text-align': 'left',
+    'width': '150px'
+}).set_table_styles([
+    {'selector': 'th', 'props': [('width', '150px')]}  # Column width for headers
+])
+
+# Inject custom CSS for styling
 st.markdown(
     """
     <style>
-    /* Set the background gradient for the entire app */
+    /* Background gradient for the app */
     body {
-        background: linear-gradient(45deg, #f8a5c2, #c2e9fb, #a1c4fd, #fdcbf1); /* Pink, light blue, blue, light pink */
+        background: linear-gradient(45deg, #f8a5c2, #c2e9fb, #a1c4fd, #fdcbf1);
         background-size: 400% 400%;
         animation: gradient 15s ease infinite;
-        min-height: 100vh;
     }
-
     @keyframes gradient {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
-
-    /* Default styling for the University column (first column) - reduced width by 50% */
     .stDataFrame table th:nth-child(1),
     .stDataFrame table td:nth-child(1) {
-        width: 42px !important;  /* 84px reduced by 50% = 42px */
-        white-space: nowrap;      /* Prevent text wrapping */
-        overflow-x: auto;         /* Enable horizontal scrolling */
-        text-overflow: ellipsis;  /* Show ellipsis for overflowed text */
-    }
-
-    /* Styling for other columns (only the rank column now) */
-    .stDataFrame table th:not(:nth-child(1)),
-    .stDataFrame table td:not(:nth-child(1)) {
-        width: 90px !important;   /* Fixed width for the rank column */
-        text-align: center;       /* Center-align text for better readability */
-    }
-
-    /* Ensure the table itself can scroll vertically if needed */
-    .stDataFrame {
-        overflow-y: auto;         /* Enable vertical scrolling for the table */
-        max-height: 400px;        /* Optional: Limit the table height */
-    }
-
-    /* Reduce the gap between the st.write heading and the st.selectbox dropdown */
-    div.stMarkdown:has(p:contains("Sort ranking by Climate")) {
-        margin-bottom: -10px !important;  /* Further reduce bottom margin */
-        padding-bottom: 0px !important;   /* Remove bottom padding */
-    }
-
-    div.stSelectbox:has(select option[value="Social Justice Rank"]) {
-        margin-top: -20px !important;     /* Further pull the dropdown closer */
-        padding-top: 0px !important;      /* Remove top padding */
-    }
-
-    /* Make the subtitle colorful with a gradient */
-    div.stMarkdown h2 {
-        background: linear-gradient(90deg, #ff0000, #ff8c00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff); /* Rainbow gradient */
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        color: transparent; /* Fallback for browsers that don't support background-clip */
-    }
-    
-    /* Add more color to the app components */
-    .stApp {
-        background: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
-        border-radius: 10px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    }
-    
-    .stSelectbox, .stButton {
-        background: rgba(255, 255, 272, 0.8);
-        border-radius: 5px;
-    }
-    
-    /* Make the main title more vibrant */
-    .stMarkdown h1 {
-        color: #6200ee;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Mobile responsiveness */
-    @media (max-width: 600px) {
-        /* Reduce padding and margins for the app container */
-        .stApp {
-            padding: 10px !important;
-            margin: 0 !important;
-        }
-
-        /* Reduce font sizes for title and subtitle */
-        .stMarkdown h1 {
-            font-size: 24px !important;  /* Smaller title font */
-        }
-
-        .stMarkdown h2 {
-            font-size: 16px !important;  /* Smaller subtitle font */
-        }
-
-        /* Reduce font size for dropdown labels and text */
-        .stMarkdown p {
-            font-size: 14px !important;
-        }
-
-        .stSelectbox label, .stSelectbox div {
-            font-size: 14px !important;
-        }
-
-        /* Make the table more compact */
-        .stDataFrame {
-            width: 100% !important;      /* Ensure table takes full width */
-            overflow-x: auto;            /* Enable horizontal scrolling if needed */
-        }
-
-        /* Reduce column widths for mobile */
-        .stDataFrame table th:nth-child(1),
-        .stDataFrame table td:nth-child(1) {
-            width: 40px !important;      /* 80px reduced by 50% = 40px */
-            font-size: 12px !important;  /* Smaller font for better fit */
-        }
-
-        .stDataFrame table th:not(:nth-child(1)),
-        .stDataFrame table td:not(:nth-child(1)) {
-            width: 60px !important;      /* Smaller width for the rank column */
-            font-size: 12px !important;  /* Smaller font for better fit */
-        }
+        width: 80px !important;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Display the table without the index column
+# Display the styled table without the index column
 st.dataframe(df_display, hide_index=True)
 
-# Optional: Add a download button for the filtered data
+# Add a download button
 st.download_button(
     label="Download Data as CSV",
     data=df_display.to_csv(index=False),
