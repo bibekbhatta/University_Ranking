@@ -81,6 +81,12 @@ st.markdown(
         background-size: 400% 400%;
         animation: gradient 15s ease infinite;
     }
+    }
+
+    /* Hide the Fork button in the top-right corner */
+    [data-testid="stHeader"] [data-testid="stToolbarActions"] {
+        display: none !important;
+    }
     @keyframes gradient {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
