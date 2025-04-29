@@ -117,6 +117,9 @@ st.download_button(
     file_name="university_rankings.csv",
     mime="text/csv"
 )
+# Optional: Additional content
+st.write("If you use this data, pls give credits to this author and provide this link: https://github.com/bibekbhatta/University_Ranking")
+
 
 # footer = """
 # <style>
