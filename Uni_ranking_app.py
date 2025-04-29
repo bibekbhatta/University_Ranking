@@ -61,7 +61,7 @@ else:
 df_display = df_display.sort_values(by=sort_by_display)
 
 # Truncate long University names to reduce column width
-df_display['University'] = df_display['University'].apply(lambda x: x[:50] + '...' if len(x) > 50 else x)
+df_display['University'] = df_display['University'].apply(lambda x: x[:40] + '...' if len(x) > 40 else x)
 
 # Apply Styler to format the table
 styled_df = df_display.style.set_properties(**{
