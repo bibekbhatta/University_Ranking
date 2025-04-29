@@ -112,7 +112,7 @@ st.dataframe(df_display, hide_index=True)
 
 # Add a download button
 st.download_button(
-    label="Download Data as CSV. \n Credits: https://github.com/bibekbhatta/University_Ranking ",
+    label="Download Data as CSV ",
     data=df_display.to_csv(index=False),
     file_name="university_rankings.csv",
     mime="text/csv"
