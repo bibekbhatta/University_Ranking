@@ -13,6 +13,7 @@ df = pd.read_csv('Uni_rankings_all.csv')  # Or df = your_dataframe
 
 # Streamlit app
 st.title("University Rankings Dashboard")
+st.write("Find university rankings in terms of Climate, Social Justice and Gender and Overall. For methodology, see at the bottom.")
 st.subheader("USA, UK, Aus, NZ, Canada and Ireland")
 
 # Dropdown for view option
@@ -101,6 +102,8 @@ st.markdown(
 # Display the styled table without the index column
 st.dataframe(df_display, hide_index=True)
 
+
+
 # Add a download button
 st.download_button(
     label="Download Data as CSV",
@@ -108,3 +111,22 @@ st.download_button(
     file_name="university_rankings.csv",
     mime="text/csv"
 )
+
+footer = """
+<style>
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f1f1f1;
+    color: black;
+    text-align: center;
+    padding: 10px;
+}
+</style>
+<div class='footer'>
+    <p>For methodology, click here: <a href="https://github.com/bibekbhatta/University_Ranking" target="_blank">link to github</a>.</p>
+</div>
+"""
+st.markdown(footer, unsafe_allow_html=True)
