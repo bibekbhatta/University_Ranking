@@ -53,27 +53,25 @@ else:
 if sort_by == "Overall Rank":
     if view_option == "Russell Group & Ivy League":
         rank_columns = [
-            "university",  # Exclude "Group" column
-            "Russell_Ivy_Climate_Rank", "Russell_Ivy_Social_Justice_Rank", 
-            "Russell_Ivy_Gender_Rank", "Russell_Ivy_Overall_Rank"
+            "university",  # Exclude "Group" and other rank columns
+            "Russell_Ivy_Overall_Rank"
         ]
         df_display = df_filtered[rank_columns]
-        df_display.columns = ["University", "Climate", "Social Justice", "Gender", "Overall"]
+        df_display.columns = ["University", "Overall"]
     else:
         rank_columns = [
-            "university",  # Exclude "Group" column
-            "Climate_Rank", "Social_Justice_Rank", 
-            "Gender_Rank", "Overall_Rank"
+            "university",  # Exclude "Group" and other rank columns
+            "Overall_Rank"
         ]
         df_display = df_filtered[rank_columns]
-        df_display.columns = ["University", "Climate", "Social Justice", "Gender", "Overall"]
+        df_display.columns = ["University", "Overall"]
 else:
     if view_option == "Russell Group & Ivy League":
         rank_column = rank_mapping[sort_by][1]  # Use Russell Ivy rank column
     else:
         rank_column = rank_mapping[sort_by][0]  # Use overall rank column
-    df_display = df_filtered[["university", "Group", rank_column]]
-    df_display.columns = ["University", "Group", sort_by_display]
+    df_display = df_filtered[["university", rank_column]]  # Exclude "Group" column
+    df_display.columns = ["University", sort_by_display]
 
 # Sort by the selected rank
 df_display = df_display.sort_values(by=sort_by_display)
@@ -105,17 +103,11 @@ st.markdown(
         text-overflow: ellipsis;  /* Show ellipsis for overflowed text */
     }
 
-    /* Styling for other columns (Group, Climate, Social Justice, Gender, Overall) */
+    /* Styling for other columns (only the rank column now) */
     .stDataFrame table th:not(:nth-child(1)),
     .stDataFrame table td:not(:nth-child(1)) {
-        width: 90px !important;   /* Fixed width for other columns */
+        width: 90px !important;   /* Fixed width for the rank column */
         text-align: center;       /* Center-align text for better readability */
-    }
-
-    /* Override University column width when there are 5 columns (Overall Rank case, Group hidden) */
-    .stDataFrame table[aria-colcount="5"] th:nth-child(1),
-    .stDataFrame table[aria-colcount="5"] td:nth-child(1) {
-        width: 56px !important;   /* 80px reduced by 30% = 56px */
     }
 
     /* Ensure the table itself can scroll vertically if needed */
@@ -197,37 +189,14 @@ st.markdown(
         /* Reduce column widths for mobile */
         .stDataFrame table th:nth-child(1),
         .stDataFrame table td:nth-child(1) {
-            width: 60px !important;      /* Smaller University column width */
+            width: 80px !important;      /* Smaller University column width */
             font-size: 12px !important;  /* Smaller font for better fit */
         }
 
         .stDataFrame table th:not(:nth-child(1)),
         .stDataFrame table td:not(:nth-child(1)) {
-            width: 60px !important;      /* Smaller width for other columns */
+            width: 60px !important;      /* Smaller width for the rank column */
             font-size: 12px !important;  /* Smaller font for better fit */
-        }
-
-        /* Further reduce University column width when there are 5 columns (Overall Rank case) */
-        .stDataFrame table[aria-colcount="5"] th:nth-child(1),
-        .stDataFrame table[aria-colcount="5"] td:nth-child(1) {
-            width: 40px !important;      /* Even smaller for Overall Rank case */
-        }
-
-        /* Hide Group column on mobile for non-Overall Rank cases to save space */
-        .stDataFrame table[aria-colcount="3"] th:nth-child(2),
-        .stDataFrame table[aria-colcount="3"] td:nth-child(2) {
-            display: none !important;    /* Hide Group column on mobile */
-        }
-
-        /* Adjust widths for remaining columns after hiding Group */
-        .stDataFrame table[aria-colcount="3"] th:nth-child(1),
-        .stDataFrame table[aria-colcount="3"] td:nth-child(1) {
-            width: 80px !important;      /* Slightly wider University column */
-        }
-
-        .stDataFrame table[aria-colcount="3"] th:nth-child(3),
-        .stDataFrame table[aria-colcount="3"] td:nth-child(3) {
-            width: 60px !important;      /* Rank column width */
         }
     }
     </style>
