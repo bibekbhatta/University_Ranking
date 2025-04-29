@@ -152,7 +152,7 @@ st.markdown(
     }
     
     .stSelectbox, .stButton {
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 272, 0.8);
         border-radius: 5px;
     }
     
@@ -235,8 +235,8 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Display the table
-st.dataframe(df_display)
+# Display the table without the index column
+st.dataframe(df_display, hide_index=True)
 
 # Optional: Add a download button for the filtered data
 st.download_button(
