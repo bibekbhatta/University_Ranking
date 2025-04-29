@@ -13,7 +13,13 @@ df = pd.read_csv('Uni_rankings_all.csv')  # Or df = your_dataframe
 
 # Streamlit app
 st.title("University Rankings Dashboard")
-st.write("Find university rankings in terms of Climate, Social Justice and Gender and Overall. For methodology, see at the bottom.")
+# st.write("Find university rankings in terms of Climate, Social Justice and Gender and Overall ranking. \n For methodology, see at the bottom.")
+# Add a text note with a clickable link using st.write
+st.write(
+    'For methodology, click here <a href="https://github.com/bibekbhatta/University_Ranking" target="_blank">https://github.com/bibekbhatta/University_Ranking </a>.',
+    unsafe_allow_html=True
+)
+
 st.subheader("USA, UK, Aus, NZ, Canada and Ireland")
 
 # Dropdown for view option
@@ -112,21 +118,21 @@ st.download_button(
     mime="text/csv"
 )
 
-footer = """
-<style>
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #f1f1f1;
-    color: black;
-    text-align: center;
-    padding: 10px;
-}
-</style>
-<div class='footer'>
-    <p>For methodology, click here: <a href="https://github.com/bibekbhatta/University_Ranking" target="_blank">link to github</a>.</p>
-</div>
-"""
-st.markdown(footer, unsafe_allow_html=True)
+# footer = """
+# <style>
+# .footer {
+#     position: fixed;
+#     left: 0;
+#     bottom: 0;
+#     width: 100%;
+#     background-color: #f1f1f1;
+#     color: black;
+#     text-align: center;
+#     padding: 10px;
+# }
+# </style>
+# <div class='footer'>
+#     <p>For methodology, click here: <a href="https://github.com/bibekbhatta/University_Ranking" target="_blank">link to github</a>.</p>
+# </div>
+# """
+# st.markdown(footer, unsafe_allow_html=True)
