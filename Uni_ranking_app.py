@@ -94,10 +94,10 @@ st.markdown(
         100% { background-position: 0% 50%; }
     }
 
-    /* Default styling for the University column (first column) - reduced width by 30% */
+    /* Default styling for the University column (first column) - reduced width by 50% */
     .stDataFrame table th:nth-child(1),
     .stDataFrame table td:nth-child(1) {
-        width: 84px !important;  /* 120px reduced by 30% = 84px */
+        width: 42px !important;  /* 84px reduced by 50% = 42px */
         white-space: nowrap;      /* Prevent text wrapping */
         overflow-x: auto;         /* Enable horizontal scrolling */
         text-overflow: ellipsis;  /* Show ellipsis for overflowed text */
@@ -189,7 +189,7 @@ st.markdown(
         /* Reduce column widths for mobile */
         .stDataFrame table th:nth-child(1),
         .stDataFrame table td:nth-child(1) {
-            width: 80px !important;      /* Smaller University column width */
+            width: 40px !important;      /* 80px reduced by 50% = 40px */
             font-size: 12px !important;  /* Smaller font for better fit */
         }
 
