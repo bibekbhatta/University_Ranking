@@ -12,7 +12,7 @@ Links are used from each homepage, up to 3 level deep, to download text from eac
 
 Universities with less than 4000 words in their webpages are discarded.
 
-Rankings are based on the number of occurences of various words along each of the dimension, scaled by total number of words for each dimension in the respective university's webpage. The list of words are provided below:   
+Rankings are based on the number of occurences of various words along each of the dimension, scaled by total number of words in the respective university's webpage. The list of words are provided below:   
 
 <b>Climate:</b>  
 carbon capture,
