@@ -7,7 +7,7 @@ Climate, Social Justice, and Gender.
 
 <b>Methodology</b>  
 Text from websites of all universities in USA, UK, Ireland, Australia, New Zealand and Canada are used to determine the rankings.  
-Maximum 15 pages are used from the official website of each university.  
+Maximum 15 pages are used from the official website of each university.  The pages were checked during Easter break 2025.  
 Links are used from each homepage, up to 3 level deep, to download text from each university.  
 
 Universities with less than 4000 words in their webpages are discarded.
