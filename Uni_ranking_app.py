@@ -78,7 +78,7 @@ else:
 # Sort by the selected rank
 df_display = df_display.sort_values(by=sort_by_display)
 
-# Inject custom CSS to style the University column, reduce gap, make subtitle colorful, and set background gradient
+# Inject custom CSS to style the University column, reduce gap, make subtitle colorful, set background gradient, and add mobile responsiveness
 st.markdown(
     """
     <style>
@@ -105,7 +105,7 @@ st.markdown(
         text-overflow: ellipsis;  /* Show ellipsis for overflowed text */
     }
 
-    /* Styling for other columns (Climate, Social Justice, Gender, Overall) */
+    /* Styling for other columns (Group, Climate, Social Justice, Gender, Overall) */
     .stDataFrame table th:not(:nth-child(1)),
     .stDataFrame table td:not(:nth-child(1)) {
         width: 90px !important;   /* Fixed width for other columns */
@@ -160,6 +160,75 @@ st.markdown(
     .stMarkdown h1 {
         color: #6200ee;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 600px) {
+        /* Reduce padding and margins for the app container */
+        .stApp {
+            padding: 10px !important;
+            margin: 0 !important;
+        }
+
+        /* Reduce font sizes for title and subtitle */
+        .stMarkdown h1 {
+            font-size: 24px !important;  /* Smaller title font */
+        }
+
+        .stMarkdown h2 {
+            font-size: 16px !important;  /* Smaller subtitle font */
+        }
+
+        /* Reduce font size for dropdown labels and text */
+        .stMarkdown p {
+            font-size: 14px !important;
+        }
+
+        .stSelectbox label, .stSelectbox div {
+            font-size: 14px !important;
+        }
+
+        /* Make the table more compact */
+        .stDataFrame {
+            width: 100% !important;      /* Ensure table takes full width */
+            overflow-x: auto;            /* Enable horizontal scrolling if needed */
+        }
+
+        /* Reduce column widths for mobile */
+        .stDataFrame table th:nth-child(1),
+        .stDataFrame table td:nth-child(1) {
+            width: 60px !important;      /* Smaller University column width */
+            font-size: 12px !important;  /* Smaller font for better fit */
+        }
+
+        .stDataFrame table th:not(:nth-child(1)),
+        .stDataFrame table td:not(:nth-child(1)) {
+            width: 60px !important;      /* Smaller width for other columns */
+            font-size: 12px !important;  /* Smaller font for better fit */
+        }
+
+        /* Further reduce University column width when there are 5 columns (Overall Rank case) */
+        .stDataFrame table[aria-colcount="5"] th:nth-child(1),
+        .stDataFrame table[aria-colcount="5"] td:nth-child(1) {
+            width: 40px !important;      /* Even smaller for Overall Rank case */
+        }
+
+        /* Hide Group column on mobile for non-Overall Rank cases to save space */
+        .stDataFrame table[aria-colcount="3"] th:nth-child(2),
+        .stDataFrame table[aria-colcount="3"] td:nth-child(2) {
+            display: none !important;    /* Hide Group column on mobile */
+        }
+
+        /* Adjust widths for remaining columns after hiding Group */
+        .stDataFrame table[aria-colcount="3"] th:nth-child(1),
+        .stDataFrame table[aria-colcount="3"] td:nth-child(1) {
+            width: 80px !important;      /* Slightly wider University column */
+        }
+
+        .stDataFrame table[aria-colcount="3"] th:nth-child(3),
+        .stDataFrame table[aria-colcount="3"] td:nth-child(3) {
+            width: 60px !important;      /* Rank column width */
+        }
     }
     </style>
     """,
