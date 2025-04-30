@@ -63,9 +63,8 @@ st.subheader(f"{ranking_type} Rankings for {section}")
 display_df = filtered_df[['university', rank_column, score_column]].rename(
     columns={rank_column: 'Rank', score_column: 'Score'}
 )
-st.dataframe(display_df, use_container_width=True)
+st.dataframe(display_df, use_container_width=True, hide_index=True)
 
-# Optional: Add a download button
 csv = display_df.to_csv(index=False)
 st.download_button(
     label="Download Table as CSV",
