@@ -1,5 +1,8 @@
 # University_Ranking
 Provides university rankings for Climate, Social Justice and Gender and overall ranking.  
+
+[Access data Dashboard here!](https://uniranking.streamlit.app/)   
+
 <b>This is a work in progress.</b>     
   
 The rankings are based on following dimensions:  
