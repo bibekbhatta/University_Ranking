@@ -8,7 +8,7 @@ Created on Mon Apr 28 16:25:35 2025
 import streamlit as st
 import pandas as pd
 
-# Set page title
+
 st.title("University Rankings for Progressiveness")
 
 st.write(
@@ -25,11 +25,9 @@ def load_data():
 
 df = load_data()
 
-# Dropdown for section
 sections = ['Russell and Ivy Combined'] + sorted(df['country'].unique().tolist())
 section = st.selectbox("Choose Country or Group", sections)
 
-# Dropdown for ranking type
 ranking_types = {
     'Climate': 'Climate_Rank',
     'Social Justice': 'Social_Justice_Rank',
@@ -38,7 +36,7 @@ ranking_types = {
 }
 ranking_type = st.selectbox("Choose Ranking Type", list(ranking_types.keys()))
 
-# Map ranking type to the correct score column
+
 score_columns = {
     'Climate': 'climate_score',
     'Social Justice': 'social_score',  # Correct column name
