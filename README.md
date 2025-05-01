@@ -11,13 +11,13 @@ Climate, Social Justice, and Gender.
 <b>Methodology</b>  
 Text from websites of all universities in USA, UK, Ireland, Australia, New Zealand and Canada are used to determine the rankings.  
 Maximum 15 pages are used from the official website of each university.  The pages were checked during Easter break 2025.  
-Links are used from each homepage, and links in resulting pages may also be used (up to max 15 pages in total for each university) to download text.  
+Further, links are used from each homepage, and links in resulting pages may also be used (up to max 15 pages in total for each university) to analyze text.  
 
 Universities with less than 4000 words in their webpages are discarded.
 
-Rankings are based on the number of occurrences of various words (shown below) along each of the 3 dimensions, scaled by the total number of words in the respective university's webpage.Then the "Overall Rank" is created as the sum of the three scores.  
+Rankings are based on the number of occurrences of various words (shown below) along each of the 3 dimensions, scaled by the total number of words in the respective university's webpage.Then the "Overall Rank" is based on the sum of the three scores.  
 
-The list of words are provided below:   
+The list of words for each dimension are provided below:   
 
 <b>1) Climate:</b>  
 carbon capture,
