@@ -73,7 +73,7 @@ st.download_button(
     mime="text/csv"
 )
 
-st.write("If you use this data, pls mention that you used the it from this site: https://github.com/bibekbhatta/University_Ranking")
+st.write("If you use this data, pls mention that you used it from this site: https://github.com/bibekbhatta/University_Ranking")
 
 
 # footer = """
