@@ -1,7 +1,7 @@
 # University_Ranking
 This app provides university rankings for 1) Climate, 2) Social Justice and 3) Gender and 4) Overall Ranking.  
 
-All universities from Russel Group (UK) and Ive League (US) are also included.
+All universities from Russel Group (UK) and Ivy League (USA) are also included.
 
 [Access data Dashboard here!](https://uniranking.streamlit.app/)   
 
