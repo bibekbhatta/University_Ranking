@@ -1,5 +1,5 @@
 # University_Ranking
-This app provides university rankings for 1) Climate, 2) Social Justice and 3) Gender and 4) Overall Ranking.  
+This app provides university rankings for 1) Climate, 2) Social Justice 3) Gender and 4) Overall Ranking for universities from USA, UK, Ireland, Australia, New Zealand and Canada.  
 
 All universities from Russel Group (UK) and Ivy League (USA) are also included.
 
